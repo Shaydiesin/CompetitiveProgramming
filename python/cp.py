@@ -9,8 +9,6 @@ def sieve(n,lst):                      # Sieve of Eratosthenes
         if(is_prime[i]):
             lst.append(i)
     return lst
-D=[]
-D=sieve(1000000,D)
 
 def binary_search(arr,l,r,x):           #binary Search
     if l<=r:
@@ -49,8 +47,4 @@ Edges=[]
 
 for i in range(E):
     Edges.append([int(i) for i in input().split()])
-
-
-#every weighted edge is considered as [ node 1 , node 2 , weight ]
-
-print(MST(V, E ,Edges))
+print("Faster Than Light")
