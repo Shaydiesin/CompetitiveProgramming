@@ -22,23 +22,33 @@ def binary_search(arr,l,r,x):           #binary Search
     else:
         return -1
 
+def find(x , parent):                                 #disjoint set Union FIND
+    if parent[x]==x:
+        return x 
+    parent[x]=find(parent[x])
+    return parent[x]
+
+def union(x, y, parent):                              #disjoint set Union UNION
+    p_x=find(x, parent)                               #find parents and if they are different make one their parent
+    p_y=find(y, parent)                               # not considering rank yet
+    if p_x != p_y:
+        parent[p_y]=p_x
+    
+    
  
-def MST(V, E, edge):                    #Kruskal's Algorithm edge is a list of edges in the format [ node 1 , node 2 , weight ]
+def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of edges in the format [ node 1 , node 2 , weight ]
     edge.sort(key = lambda x: x[2])     # sorting according to weights
-    Included=[False]*(V+1)              #0th index not considered
+    Included=[False]*(V+1)              # 0th index not considered
+    Parent=[int(i) for i in range(V+1)]
     cost = 0
     count = 0
     for i in range(E):
-        if not Included[edge[i][0]] or not Included[edge[i][1]]:
+        if find(edge[i][0], Parent)!=find(edge[i][0], Parent):
             cost+=edge[i][2]
-            if not Included[edge[i][0]]:
-                Included[edge[i][0]]=True
-                count+=1
-            if not Included[edge[i][1]]:
-                Included[edge[i][1]]=True
-                count+=1
-            if count==V-1:
-                break
+            union(edge[i][0], edge[i][0], Parent)
+            count+=1
+        if count==V-1:
+            break
     return cost
 
 V,E=[int(i) for i in input().split()]
