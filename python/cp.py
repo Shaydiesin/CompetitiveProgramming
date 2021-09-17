@@ -43,13 +43,17 @@ def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of 
     cost = 0
     count = 0
     for i in range(E):
-        if find(edge[i][0], Parent)!=find(edge[i][0], Parent):
+        if find(edge[i][0], Parent)!=find(edge[i][1], Parent):
             cost+=edge[i][2]
-            union(edge[i][0], edge[i][0], Parent)
+            union(edge[i][0], edge[i][1], Parent)
             count+=1
         if count==V-1:
             break
-    return cost
+
+    if count==V-1:
+        return cost
+    else:
+        return -1
 
 V,E=[int(i) for i in input().split()]
 
@@ -57,4 +61,6 @@ Edges=[]
 
 for i in range(E):
     Edges.append([int(i) for i in input().split()])
-print("Faster Than Light")
+
+print(MST(V,E,Edges))
+print("Hello")
