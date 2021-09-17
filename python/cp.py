@@ -63,4 +63,3 @@ for i in range(E):
     Edges.append([int(i) for i in input().split()])
 
 print(MST(V,E,Edges))
-print("Hello")
