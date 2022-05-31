@@ -1,3 +1,22 @@
+# import sys
+# ONLINE_JUDGE = __debug__
+# if ONLINE_JUDGE:
+#     import io,os
+#     input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline        #fast input/output
+
+# sys.stdout = open("in.txt")
+
+# def inp():
+#     return(int(input()))
+# def inlt():
+#     return(list(map(int,input().split())))
+# def insr():
+#     return(input().strip())
+# def invr():
+#     return(map(int,input().split()))
+
+# sys.stdout.write(str(ans)+"\n")
+
 def sieve(n,lst):                      # Sieve of Eratosthenes
     is_prime=[True]*(n+1)
     is_prime[1]=False
