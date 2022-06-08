@@ -43,6 +43,33 @@ def binary_search(arr,l,r,x,idx):           #binary Search l = 0, r =len(arr - 1
     else:
         return idx
 
+def geq_bin_search(arr,l,r,x,idx):          #binary Search l = 0, r =len(arr - 1) To find element just greater than equal to x
+    if l<=r:
+        mid=(l+r)//2
+        if arr[mid]>=x:
+            idx = mid
+            return geq_bin_search(arr,l,mid-1,x,idx) 
+        elif arr[mid]<x:
+            return geq_bin_search(arr,mid+1,r,x,idx)
+    else:
+        return idx
+
+def leq_bin_search(arr,l,r,x,idx):          #binary Search l = 0, r =len(arr - 1) To find element just lesss than equal to x
+    if l<=r:
+        mid=(l+r)//2
+        if arr[mid]==x:
+            idx = mid                       #comment this line for strictly greater
+            return leq_bin_search(arr,l,mid-1,x,idx)
+        elif arr[mid]<x:
+            idx = mid
+            return leq_bin_search(arr,mid+1,r,x,idx)
+        elif arr[mid]>x:
+            return leq_bin_search(arr,l,mid - 1,x,idx)
+    else:
+        if idx!=-1:
+            return binary_search(arr,0,idx,arr[idx],idx)
+        return idx
+
 def find(x , parent):                                 #disjoint set Union FIND
     if parent[x]==x:
         return x 
