@@ -29,17 +29,19 @@ def sieve(n,lst):                      # Sieve of Eratosthenes
             lst.append(i)
     return lst
 
-def binary_search(arr,l,r,x):           #binary Search
+
+def binary_search(arr,l,r,x,idx):           #binary Search l = 0, r =len(arr - 1)
     if l<=r:
         mid=(l+r)//2
         if arr[mid]==x:
-            return mid 
+            idx = mid
+            return binary_search(arr,l,mid-1,x,idx) 
         elif arr[mid]>x:
-            return binary_search(arr,l,mid-1,x)
+            return binary_search(arr,l,mid-1,x,idx)
         else:
-            return binary_search(arr,mid+1,r,x)
+            return binary_search(arr,mid+1,r,x,idx)
     else:
-        return -1
+        return idx
 
 def find(x , parent):                                 #disjoint set Union FIND
     if parent[x]==x:
@@ -52,8 +54,17 @@ def union(x, y, parent):                              #disjoint set Union UNION
     p_y=find(y, parent)                               # not considering rank yet
     if p_x != p_y:
         parent[p_y]=p_x
-    
-    
+
+def dfs(node):
+    adj ={}
+    visited = [False] #*N
+    print(node)
+    visited[node] = True                           #1 indexing 
+
+    for i in adj[node]:
+        if not visited[i]:
+            visited[i] = True
+            dfs(i)
  
 def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of edges in the format [ node 1 , node 2 , weight ]
     edge.sort(key = lambda x: x[2])     # sorting according to weights
@@ -74,11 +85,24 @@ def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of 
     else:
         return -1
 
-V,E=[int(i) for i in input().split()]
+# def dfs():
+#     return
+# 
+# def bfs():
+#     return
+# def Kadane():
+#     return
 
-Edges=[]
 
-for i in range(E):
-    Edges.append([int(i) for i in input().split()])
+# V,E=[int(i) for i in input().split()]
 
-print(MST(V,E,Edges))
+# Edges=[]
+
+# for i in range(E):
+#     Edges.append([int(i) for i in input().split()])
+
+# print(MST(V,E,Edges))
+
+A = [1 ,3, 4, 5]
+
+print(binary_search(A,0,len(A)-1,int(input())))
