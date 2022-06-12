@@ -4,6 +4,8 @@
 #     import io,os
 #     input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline        #fast input/output
 
+
+# print(sys.setrecursionlimit(300000))                 # set it to N + logN in dfs recursive problems
 # sys.stdout = open("in.txt")
 
 # def inp():
@@ -92,6 +94,21 @@ def dfs(node):
         if not visited[i]:
             visited[i] = True
             dfs(i)
+
+# for dp on trees and tree traversals
+# def dfs_tree(node,parent):
+#     visited[node]= True
+
+#     g_st[node]= A[node-1]
+#     for child in adj[node]:
+#         if child!=parent:
+#             if not visited[child]:
+#                 if g_st[child]!=0:
+#                     g_st[node]=gcd(g_st[node],g_st[child])
+#                 else:
+#                     g_st[node]=gcd(g_st[node],dfs(child,node))
+
+#     return g_st[node]
  
 def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of edges in the format [ node 1 , node 2 , weight ]
     edge.sort(key = lambda x: x[2])     # sorting according to weights
