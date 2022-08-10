@@ -19,6 +19,21 @@
 
 # sys.stdout.write(str(ans)+"\n")
 
+def segmentTree(arr,node,l,r):
+    if l==r:
+        segment_tree[node] = arr[l]
+        return segment_tree[node]
+    else:
+        mid = (l+r)//2
+        left = segmentTree(arr,2*node+1,l,mid)
+        right = segmentTree(arr,2*node +2, mid+1,r)
+        segment_tree[node] = left+right
+        return segment_tree[node]
+
+arr = list(range(1,6))
+segment_tree = [-1]*(4*len(arr))
+segmentTree(arr,0,0,len(arr)-1)
+
 def sieve(n,lst):                      # Sieve of Eratosthenes
     is_prime=[True]*(n+1)
     is_prime[1]=False
