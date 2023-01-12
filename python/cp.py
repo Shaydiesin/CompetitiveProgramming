@@ -19,7 +19,7 @@
 
 # sys.stdout.write(str(ans)+"\n")
 
-def segmentTree(arr,node,l,r):
+def segmentTree(arr,node,l,r):         #Segment tree build 
     if l==r:
         segment_tree[node] = arr[l]
         return segment_tree[node]
