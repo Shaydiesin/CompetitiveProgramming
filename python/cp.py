@@ -22,13 +22,7 @@ import heapq
 # sys.stdout.write(str(ans)+"\n")
 
 
-class DijkstraNode:
-    def __init__(self, node, value):
-        self.Node = node
-        self.Value = value
-    
-    def __lt__(self, other):
-        return self.Value < other.Value
+
 
 
 def segmentTree(arr,node,l,r):         #Segment tree build 
@@ -143,13 +137,38 @@ def bfs(node,adj):
                 q.append(i)
 
 
+
+class DijkstraNode:
+    def __init__(self, node, value):
+        self.Node = node
+        self.Value = value
+    
+    def __lt__(self, other):
+        return self.Value < other.Value
+
+
+
 def Dijkstra(node,adj):
     N = len(adj)
     dist = [10**9]*N               # increase the initial value even further if requireds
     dist[node] = 0
 
     pq = []
+
+    tmp = DijkstraNode(node,0)
+
+    heapq.heapify(pq)
+    heapq.heappush(pq,tmp)
     
+    while(len(pq)!=0):
+        curr = heapq.heappop(pq)
+        for i in adj[curr.Node]:
+            if curr.dist + i[1] < dist[i[0]]:
+                dist[i[0]] = curr.dist + i[1]
+                tmp = DijkstraNode(i[0],dist[i[0]])
+                heapq.heappush(pq,tmp)
+    
+    return dist
 
 
 # for dp on trees and tree traversals
