@@ -1,4 +1,6 @@
 # import sys
+from collections import deque
+import heapq
 # ONLINE_JUDGE = __debug__
 # if ONLINE_JUDGE:
 #     import io,os
@@ -18,6 +20,16 @@
 #     return(map(int,input().split()))
 
 # sys.stdout.write(str(ans)+"\n")
+
+
+class DijkstraNode:
+    def __init__(self, node, value):
+        self.Node = node
+        self.Value = value
+    
+    def __lt__(self, other):
+        return self.Value < other.Value
+
 
 def segmentTree(arr,node,l,r):         #Segment tree build 
     if l==r:
@@ -109,6 +121,36 @@ def dfs(node):
         if not visited[i]:
             visited[i] = True
             dfs(i)
+
+
+
+def bfs(node,adj):
+    N = len(adj)
+    
+    visited = [False]*N 
+    visited[node] = True 
+
+    q = deque()
+
+    q.append(node)             # update the type for node
+
+    while(len(q)!=0):
+        curr = q.popleft()
+        for i in adj[curr]:
+            if not visited[i]:
+                visited[i] = True 
+                print(q)
+                q.append(i)
+
+
+def Dijkstra(node,adj):
+    N = len(adj)
+    dist = [10**9]*N               # increase the initial value even further if requireds
+    dist[node] = 0
+
+    pq = []
+    
+
 
 # for dp on trees and tree traversals
 # def dfs_tree(node,parent):
