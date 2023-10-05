@@ -147,6 +147,9 @@ class DijkstraNode:
         return self.Value < other.Value
 
 
+# The general idea is to start at the source Node
+# When you relaxed a vertex add it to the priority queue
+# using the above data type made
 
 def Dijkstra(node,adj):
     N = len(adj)
@@ -170,6 +173,20 @@ def Dijkstra(node,adj):
     
     return dist
 
+
+
+# In the given edge list Keep relaxing N-1 times (N) is the number of nodes
+# If in the Nth iteration there is improvement it means there is negative cycle
+def BellManFord(edges,N):
+    dist = [10**9]*N 
+    return 
+
+
+# Given the graph fix a vertex "K" and using it relax between every other 
+# vertex pair i,j 
+def FloydWarshall():
+    
+    return 
 
 # for dp on trees and tree traversals
 # def dfs_tree(node,parent):
