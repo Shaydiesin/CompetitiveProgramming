@@ -1,14 +1,9 @@
-# import sys
+import sys
 from collections import deque
 import heapq
-# ONLINE_JUDGE = __debug__
-# if ONLINE_JUDGE:
-#     import io,os
-#     input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline        #fast input/output
 
-
-# print(sys.setrecursionlimit(300000))                 # set it to N + logN in dfs recursive problems
-# sys.stdout = open("in.txt")
+# Setting high recursion depth for dfs
+sys.setrecursionlimit(250000) 
 
 # def inp():
 #     return(int(input()))
@@ -21,8 +16,30 @@ import heapq
 
 # sys.stdout.write(str(ans)+"\n")
 
+# N= 100
 
+#
+#                        [0, n-1]
+#                       /       \
+#                 [0, n/2]      [n/2+1,n-1]
+#                   /     \
+#              [0,n/4]  [n/4, n/2]  
+#               /
+#             ...              
+#             /
+#       [0,0]             
 
+# Binary Exponentiation for a^b modulo m
+def binExp(a,b,mod):
+    ans = 1
+    while b>0:
+        if b&1:
+            ans*=a 
+            ans%=mod
+        a = (a*a)%mod 
+        b = b>>1
+        
+    return ans
 
 
 def segmentTree(arr,node,l,r):         #Segment tree build 
@@ -93,6 +110,11 @@ def leq_bin_search(arr,l,r,x,idx):          #binary Search l = 0, r =len(arr - 1
             return binary_search(arr,0,idx,arr[idx],idx)
         return idx
 
+
+
+#   [1,2,3,4,5,6,7,8,9,10]
+#   [ [1,3], 2,4, [5,6] ,7,8,9,10 ]
+
 def find(x , parent):                                 #disjoint set Union FIND
     if parent[x]==x:
         return x 
@@ -120,14 +142,12 @@ def dfs(node):
 
 def bfs(node,adj):
     N = len(adj)
-    
     visited = [False]*N 
     visited[node] = True 
 
     q = deque()
 
     q.append(node)             # update the type for node
-
     while(len(q)!=0):
         curr = q.popleft()
         for i in adj[curr]:
@@ -179,14 +199,18 @@ def Dijkstra(node,adj):
 # If in the Nth iteration there is improvement it means there is negative cycle
 def BellManFord(edges,N):
     dist = [10**9]*N 
+    
     return 
 
 
 # Given the graph fix a vertex "K" and using it relax between every other 
 # vertex pair i,j 
-def FloydWarshall():
+def FloydWarshall(adjMat):
     
     return 
+
+
+
 
 # for dp on trees and tree traversals
 # def dfs_tree(node,parent):
@@ -200,9 +224,9 @@ def FloydWarshall():
 #                     g_st[node]=gcd(g_st[node],g_st[child])
 #                 else:
 #                     g_st[node]=gcd(g_st[node],dfs(child,node))
-
+# 
 #     return g_st[node]
- 
+
 def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of edges in the format [ node 1 , node 2 , weight ]
     edge.sort(key = lambda x: x[2])     # sorting according to weights
     Included=[False]*(V+1)              # 0th index not considered
@@ -221,15 +245,6 @@ def MST(V, E, edge):                    # Kruskal's Algorithm edge is a list of 
         return cost
     else:
         return -1
-
-# def dfs():
-#     return
-# 
-# def bfs():
-#     return
-# def Kadane():
-#     return
-
 
 # V,E=[int(i) for i in input().split()]
 
